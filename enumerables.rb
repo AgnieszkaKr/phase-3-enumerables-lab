@@ -12,14 +12,24 @@ end
 # given an array of spicy foods, **return an array of strings**
 # with the names of each spicy food
 def get_names(spicy_foods)
+  names = spicy_foods.collect do |prop|
+    prop[:name]
+  end
+  names
   # your code here
 end
+
 
 # given an array of spicy foods, **return an array of hashes** 
 # where the heat level of the food is greater than 5
 def spiciest_foods(spicy_foods)
-  # your code here
+    select = spicy_foods.select do |food|
+      food[:heat_level]>5
+    end
+    p select
 end
+# spiciest_foods(spicy_foods)
+
 
 # given an array of spicy foods, **output to the terminal**
 # each spicy food in the following format: 
@@ -28,19 +38,34 @@ end
 # "hello" * 3 == "hellohellohello"
 def print_spicy_foods(spicy_foods)
   # your code here
+  spicy_foods.each do |food|
+    spicy_scale = "🌶" * food[:heat_level]
+    puts "#{food[:name]} (#{food[:cuisine]}) | Heat Level: #{spicy_scale}"
+  end
 end
 
 # given an array of spicy foods and a string representing a cuisine, **return a single hash**  
 # for the spicy food whose cuisine matches the cuisine being passed to the method
 def get_spicy_food_by_cuisine(spicy_foods, cuisine)
   # your code here
+  match_cusine = spicy_foods.find do |food|
+    food[:cuisine] == cuisine
+  end
+  match_cusine
 end
+
 
 # Given an array of spicy foods, **return an array of hashes** 
 # sorted by heat level from lowest to highest
 def sort_by_heat(spicy_foods)
+  sort = spicy_foods.sort_by do |food|
+    food[:heat_level]
+  end
+  sort
   # your code here
 end
+
+sort_by_heat(spicy_foods)
 
 # given an array of spicy foods, output to the terminal ONLY 
 # the spicy foods that have a heat level greater than 5, in the following format: 
@@ -48,10 +73,27 @@ end
 # HINT: Try to use methods you've already written to solve this!
 def print_spiciest_foods(spicy_foods)
   # your code here
+  selected = spicy_foods.select do |food|
+    food[:heat_level] > 5
+  end
+
+  selected.each do |food|
+  spicy_scale = "🌶" * food[:heat_level]
+  puts "#{food[:name]} (#{food[:cuisine]}) | Heat Level: #{spicy_scale}"
+  end
+
+
 end
+
+print_spiciest_foods(spicy_foods)
 
 # given an array of spicy foods, return an integer representing 
 # the average heat level of all the spicy foods in the array
 def average_heat_level(spicy_foods)
   # your code here
+  sum = spicy_foods.sum do |food|
+    food[:heat_level]
+  end
+
+  sum/3
 end
